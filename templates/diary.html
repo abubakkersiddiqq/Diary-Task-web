@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Diary</title>
+<style>
+  body {
+    background-color: #f7f5ff; /* soft lavender background */
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .diary-container {
+    max-width: 650px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .textarea {
+    width: 100%;
+    font-size: 20px;
+    font-style: italic;
+    font-family: 'Patrick Hand', cursive;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    min-height: 200px;
+    background-color: #f9f9fb;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.05);
+    resize: vertical;
+  }
+
+  p {
+    font-size: 16px;
+    margin-top: 20px;
+    color: #333;
+  }
+
+  label {
+    margin-right: 15px;
+    font-size: 15px;
+  }
+
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+
+  .button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .button:hover {
+    background-color: #8e44ad;
+  }
+
+  .back-button-container {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .back-button {
+    background-color: #dddddd;
+    color: #333;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-button:hover {
+    background-color: #bbbbbb;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="diary-container">
+  <form method="post" action="/save_diary">
+    <textarea class="textarea" name="diary_entry" placeholder="Dear Diary..." required></textarea>
+
+    <p>Do you want to save the entry?</p>
+    <label><input type="radio" name="option" value="yes" required> Yes</label>
+    <label><input type="radio" name="option" value="no"> No</label>
+
+    <br>
+    <input class="button" type="submit" name="submit" value="Submit">
+  </form>
+
+  <div class="back-button-container">
+    <form method="get" action="{{ url_for('home') }}">
+      <button class="back-button" type="submit">← Back to Home</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

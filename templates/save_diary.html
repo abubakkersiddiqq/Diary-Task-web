@@ -1,0 +1,128 @@
+{% extends "base.html"%}
+
+{% block title %}
+<title>Save Diary</title>
+<style>
+  body {
+    background-color: #fdfcfb;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .warning {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    margin: 20px auto;
+    width: 90%;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .diary-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 10px;
+  }
+
+  .diary-box {
+    flex: 1 1 45%;
+    min-width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .old-diary-box {
+    background: #f3e5ab;
+    border: 1px solid #d6c282;
+    color: #3a2f0b;
+    font-family: Georgia, serif;
+  }
+
+  .new-diary-box {
+    background: #f8f8f8;
+    border: 2px solid #ddd;
+  }
+
+  .diary-line {
+    font-style: italic;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .date {
+    text-align: right;
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .back-button-container {
+    text-align: center;
+    margin: 30px auto;
+  }
+
+  .back-button {
+    background-color: #ccc;
+    color: #333;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-button:hover {
+    background-color: #aaa;
+  }
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% if choice == 'no' %}
+  <div class="warning">{{ unnamed }}</div>
+{% endif %}
+
+<div class="diary-container">
+  <div class="diary-box old-diary-box">
+    <div class="date">{{ date }}</div>
+    <h1>Old Diary</h1>
+    {% for line in p_diary %}
+      <p class="diary-line">{{ line }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="diary-box new-diary-box">
+    <div class="date">{{ date }}</div>
+    <h1>New Diary</h1>
+    {% for line in n_diary %}
+      <p class="diary-line">{{ line }}</p>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="back-button-container">
+  <form method="get" action="{{ url_for('diary') }}">
+    <button class="back-button" type="submit">← Back</button>
+  </form>
+</div>
+{% endblock %}

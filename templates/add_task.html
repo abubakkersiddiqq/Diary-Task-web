@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Add Task</title>
+<style>
+    body {
+        background-color: #f0f8ff; /* Light blue background */
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .task-box {
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 35px 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .task-box p {
+        font-size: 18px;
+        margin: 12px 0 8px;
+        color: #333;
+    }
+
+    .task-box input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 18px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    .task-box input[type="radio"] {
+        margin: 0 10px 0 0;
+    }
+
+    .task-box label {
+        font-size: 16px;
+        margin-right: 20px;
+        color: #444;
+    }
+
+    .task-box input[type="submit"],
+    .task-box button {
+        padding: 10px 22px;
+        font-size: 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .task-box input[type="submit"] {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .task-box input[type="submit"]:hover {
+        background-color: #2980b9;
+    }
+
+    .task-box button {
+        background-color: #888;
+        color: white;
+        margin-top: 15px;
+    }
+
+    .task-box button:hover {
+        filter: brightness(1.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="task-box">
+    <form method="post" action="{{ url_for('save_task') }}">
+        {% for task in range(count) %}
+            <p>Task-{{ loop.index }}</p>
+            <input type="text" name="task{{ task }}" required>
+        {% endfor %}
+
+        <p>Do you want to save the tasks?</p>
+        <label><input type="radio" name="option" value="yes" required> Yes</label>
+        <label><input type="radio" name="option" value="no" required> No</label>
+
+        <input type="hidden" name="count" value="{{ count }}">
+        <br><br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+
+    <form method="get" action="{{ url_for('task_count') }}">
+        <button type="submit">Back</button>
+    </form>
+</div>
+{% endblock %}

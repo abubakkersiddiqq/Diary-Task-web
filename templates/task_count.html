@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Total Task</title>
+<style>
+    body {
+        background-color: #eef5ff; /* light blue background */
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .task-form-container {
+        max-width: 420px;
+        margin: 60px auto;
+        padding: 35px 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .task-form-container p {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 25px;
+    }
+
+    .task-form-container input[type="number"] {
+        padding: 12px;
+        font-size: 16px;
+        width: 85%;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    .task-form-container input[type="submit"],
+    .task-form-container button[type="submit"] {
+        padding: 10px 22px;
+        font-size: 15px;
+        margin-top: 10px;
+        background-color: #5c85d6;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .task-form-container input[type="submit"]:hover,
+    .task-form-container button[type="submit"]:hover {
+        background-color: #3b66b3;
+    }
+
+    .task-form-container form {
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="task-form-container">
+    <form method="post" action="/task_count">
+        <p>How many tasks would you like to add?</p>
+        <input type="number" name="count" min="1" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <form method="get" action="{{ url_for('home') }}">
+        <button type="submit">Back</button>
+    </form>
+</div>
+{% endblock %}

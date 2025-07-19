@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Edit Task</title>
+<style>
+    body {
+        background-color: #fff5f5; /* Light warm background for deletion */
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-container {
+        max-width: 420px;
+        margin: 80px auto;
+        padding: 35px 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .form-container label {
+        font-size: 18px;
+        margin-bottom: 15px;
+        display: block;
+        color: #444;
+    }
+
+    .form-container input[type="number"] {
+        width: 90%;
+        padding: 12px;
+        font-size: 16px;
+        margin-bottom: 25px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .form-container button {
+        padding: 10px 22px;
+        font-size: 15px;
+        margin: 5px;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-container button[type="submit"] {
+        background-color: #e74c3c;
+    }
+
+    .form-container button[type="submit"]:hover {
+        background-color: #c0392b;
+    }
+
+    .form-container button[type="button"],
+    .form-container form[action="{{ url_for('view_task') }}"] button {
+        background-color: #888;
+    }
+
+    .form-container button:hover {
+        filter: brightness(1.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        <label for="sno">Enter the Serial Number of the Task You Want to Remove:</label>
+        <input type="number" id="sno" name="s.no_removes" min="1" required>
+        <button type="submit">Remove Task</button>
+    </form>
+
+    <form method="get" action="{{ url_for('view_task') }}">
+        <button type="submit">Back</button>
+    </form>
+</div>
+{% endblock %}
